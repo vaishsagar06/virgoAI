@@ -1,0 +1,48 @@
+{
+  "accounts": [
+    {
+      "accountID": "6220l3igy0003ec299sj98000tria",
+      "accountName": "Arc Security Inc",
+      "accountNumber": "103676561402",
+      "routingNumber": "122105155",
+      "bankName": "US Bank East Grand Forks",
+      "accountType": "DDA",
+      "currency": "USD",
+      "entitlementsOnAccount": [
+        "PreviousDay Balances"
+      ],
+      "dataRetentionOnAccount": "4MONTHS"
+    }
+  ],
+  "creditCardAccounts": [
+    {
+      "accountID": "6220l3igy0003ec299sj98000tria",
+      "creditCardName": "Arc Security Inc",
+      "creditCardNumber": 103676561402,
+      "bankName": "US Bank East Grand Forks",
+      "accountType": "Credit Card",
+      "isReportingEnabled": true
+    }
+  ],
+  "loanAccounts": [
+    {
+      "accountID": "x970fsspo0002bv24bg2db000uapt",
+      "accountNumber": "9801054",
+      "accountName": "ALS_Test",
+      "bankName": "US Bank Minnesota",
+      "loanAccountType": "UNL",
+      "currency": "USD",
+      "hasStatementsEnabled": true
+    }
+  ],
+  "pageMeta": {
+    "pageNumber": 5,
+    "pageSize": 25,
+    "pageCount": 20,
+    "totalCount": 400,
+    "links": {
+      "prev": "/resourceURL?pageNumber=4&pageSize=25",
+      "next": "/resourceURL?pageNumber=6&pageSize=25"
+    }
+  }
+}
