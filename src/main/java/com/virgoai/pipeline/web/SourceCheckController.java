@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.virgoai.pipeline.source.AccountsClient;
 import com.virgoai.pipeline.source.AccountsResponse;
+import com.virgoai.pipeline.source.FdicClient;
+import com.virgoai.pipeline.source.FdicResponse;
 import com.virgoai.pipeline.source.TransactionsClient;
 import com.virgoai.pipeline.source.TransactionsResponse;
 
@@ -15,15 +17,22 @@ import com.virgoai.pipeline.source.TransactionsResponse;
 public class SourceCheckController {
     private final AccountsClient accounts;
     private final TransactionsClient transactions;
+    private final FdicClient fdic;
 
-    public SourceCheckController(AccountsClient accounts, TransactionsClient transactions) {
+    public SourceCheckController(AccountsClient accounts, TransactionsClient transactions, FdicClient fdic) {
         this.accounts = accounts;
         this.transactions = transactions;
+        this.fdic = fdic;
     }
 
     @GetMapping("/check/accounts")
     public List<AccountsResponse.Account> accounts(){
         return accounts.fetchAccounts();
+    }
+
+    @GetMapping("/check/fdic")
+    public FdicResponse fdic() {
+        return fdic.fetchPage(0, 3);
     }
 
     @GetMapping("/check/transactions")
