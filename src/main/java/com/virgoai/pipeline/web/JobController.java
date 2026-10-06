@@ -9,18 +9,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.virgoai.pipeline.fault.FaultSwitches;
 import com.virgoai.pipeline.job.AccountsJob;
+import com.virgoai.pipeline.job.TransactionsJob;
 import com.virgoai.pipeline.target.TargetStore;
 
 @RestController
 public class JobController {
 
     private final AccountsJob accountsJob;
+    private final TransactionsJob transactionsJob;
+    private final FaultSwitches faults;
     private final JdbcTemplate jdbc;
     private final TargetStore target;
 
-    public JobController(AccountsJob accountsJob, JdbcTemplate jdbc, TargetStore target) {
+    public JobController(AccountsJob accountsJob, TransactionsJob transactionsJob, FaultSwitches faults,
+            JdbcTemplate jdbc, TargetStore target) {
         this.accountsJob = accountsJob;
+        this.transactionsJob = transactionsJob;
+        this.faults = faults;
         this.jdbc = jdbc;
         this.target = target;
     }
@@ -28,6 +35,22 @@ public class JobController {
     @PostMapping("/jobs/accounts/run")
     public Map<String, Object> runAccounts() {
         return accountsJob.run();
+    }
+
+    @PostMapping("/jobs/transactions/run")
+    public Map<String, Object> runTransactions() {
+        return transactionsJob.run();
+    }
+
+    @GetMapping("/faults")
+    public Map<String, Boolean> faults() {
+        return faults.all();
+    }
+
+    @PostMapping("/faults/{name}/{state}")
+    public Map<String, Boolean> setFault(@PathVariable String name, @PathVariable String state) {
+        faults.set(name, "on".equalsIgnoreCase(state));
+        return faults.all();
     }
 
     @GetMapping("/runs")
