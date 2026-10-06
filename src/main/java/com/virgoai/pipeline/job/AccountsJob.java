@@ -8,9 +8,12 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 
+import com.virgoai.pipeline.fault.FaultSwitches;
 import com.virgoai.pipeline.log.JobLog;
 import com.virgoai.pipeline.source.AccountsClient;
 import com.virgoai.pipeline.source.AccountsResponse;
@@ -25,13 +28,16 @@ public class AccountsJob {
     private final JdbcTemplate jdbc;
     private final TargetStore target;
     private final JobLog log;
+    private final FaultSwitches faults;
     private final String transformSql;
 
-    public AccountsJob(AccountsClient client, JdbcTemplate jdbc, TargetStore target, JobLog log) {
+    public AccountsJob(AccountsClient client, JdbcTemplate jdbc, TargetStore target, JobLog log,
+            FaultSwitches faults) {
         this.client = client;
         this.jdbc = jdbc;
         this.target = target;
         this.log = log;
+        this.faults = faults;
         this.transformSql = readSql("sql/accounts_transform.sql");
     }
 
@@ -46,6 +52,12 @@ public class AccountsJob {
         log.info(runId, JOB, step, "run_started", "extract_mode=FULL write_mode=OVERWRITE");
 
         try {
+            if (faults.isOn(FaultSwitches.ACCOUNTS_EXPIRED_CREDENTIAL)) {
+                log.warn(runId, JOB, step, "source_rejected",
+                        "http_status=401 endpoint=/accounts auth=bearer_token "
+                                + "response_error=invalid_token response_detail=\"access token expired\"");
+                throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+            }
             List<AccountsResponse.Account> accounts = client.fetchAccounts();
             read = accounts.size();
             log.info(runId, JOB, step, "extract_done", "records_read=" + read);
@@ -78,14 +90,13 @@ public class AccountsJob {
             log.info(runId, JOB, "END", "run_succeeded",
                     "records_read=" + read + " records_loaded=" + loaded);
         } catch (Exception e) {
-            String message = e.getMessage() == null ? e.getClass().getSimpleName() : e.getMessage();
-            if (message.length() > 900) {
-                message = message.substring(0, 900);
-            }
+            String message = Errors.describe(e);
             jdbc.update("UPDATE job_run SET status = 'FAILED', finished_at = CURRENT_TIMESTAMP, "
                     + "records_read = ?, records_loaded = ?, failed_step = ?, error_message = ? "
                     + "WHERE run_id = ?", read, loaded, step, message, runId);
             log.error(runId, JOB, step, "run_failed", message);
+            log.info(runId, JOB, "END", "run_state",
+                    "records_read=" + read + " records_loaded=" + loaded);
         }
 
         return jdbc.queryForMap("SELECT * FROM job_run WHERE run_id = ?", runId);
