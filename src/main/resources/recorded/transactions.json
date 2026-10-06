@@ -1,0 +1,106 @@
+{
+  "transactions": [
+    {
+      "accountID": "6220l3igy0003ec299sj98000tria",
+      "transactionDate": "2020-05-03T00:00:00.000+0000",
+      "debitCreditIndicator": "DEBIT",
+      "transactionDescription": "Outgoing Intl Wire Transfer(s)",
+      "transactionType": "ACH",
+      "BAICode": "514",
+      "transactionReferenceNumber": "67896656",
+      "bankReferenceNumber": "893456789744",
+      "amount": 78008,
+      "currency": "USD",
+      "achTransactionDetails": {
+        "companyName": "NAME000003279",
+        "individualID": "ACH CCD CREDIT",
+        "companyID": "1918144465",
+        "secCode": "CCD",
+        "companyDiscretionaryData": "G",
+        "entryDescription": "TAXPAYMENT",
+        "effectiveEntryDate": "2024-01-15"
+      },
+      "rtpTransactionDetails": {
+        "created": "2024-01-15",
+        "debtorClientReference": "NOREF",
+        "debtorBankReference": "20220105042000013P1BRRRR00167874862",
+        "debtorName": "WESTERN GLAZIERS RETIREMENT PLANDEP OSIT ACCOUNT",
+        "debtorAccount": "169709692134",
+        "debtorBankID": "123000220",
+        "debtorBank": "US Bank",
+        "debtorAddress": "PO BOX 4148 PORTLAND 972084148",
+        "creditorName": "IBEW & United Workers FCU",
+        "creditorAccount": "323075194",
+        "creditorBankID": "244084264",
+        "creditorBank": "Corporate One Federal Credit Union",
+        "creditorAddress": "9955 SE Washington St Portland 97216"
+      },
+      "zelleTransactionDetails": {
+        "receiverName": "REBECCA S",
+        "alias": "aa@usbank.com",
+        "paymentType": "INSTANT",
+        "effectiveDate": "2024-01-15",
+        "paymentInstructionID": "PI0000001155129",
+        "parameterName": "record number",
+        "parameterValue": "abc123"
+      },
+      "checksTransactionDetails": {
+        "checkNumber": "123456",
+        "captureDate": "2024-01-15"
+      },
+      "wiresTransactionDetails": {
+        "parNumber": "190521022122",
+        "source": "FTR9000094200914",
+        "repeatCode": "CODE01",
+        "SendersReference": "ABCD12345678901234567890",
+        "originator": "XYZCO OP ACCT 1234 12345 APPLE RD CITY UNITED STATES STATE",
+        "debtor": "XYZCO OP ACCT 1234 12345 APPLE RD CITY UNITED STATES STATE",
+        "ultimateDebtor": "XYZCO OP ACCT 1234 12345 APPLE RD CITY UNITED STATES STATE",
+        "originatorBank": "12345 ANY BANK",
+        "debtorAgent": "12345 ANY BANK",
+        "beneficiaryReference": "11112222XXXX4444",
+        "creditorReference": "11112222XXXX4444",
+        "beneficiary": "123412341234 SAMPLECO 54321 ORANGE DR CITY UNITED STATES STATE",
+        "beneficiaryBank": "987654321 US BK CINCINNATI",
+        "creditorAgent": "987654321 US BK CINCINNATI",
+        "creditor": "123412341234 SAMPLECO 54321 ORANGE DR CITY UNITED STATES STATE",
+        "ultimateCreditor": "123412341234 SAMPLECO 54321 ORANGE DR CITY UNITED STATES STATE",
+        "originatorToBeneficiaryInfo": "INVOICE 112233 ABC123",
+        "purposeOfPayment": "INVOICE 112233",
+        "remittanceInformation": "ABC123",
+        "sendingBank": "123456789 BK AMER NYC",
+        "instructingAgent": "123456789 BK AMER NYC",
+        "intermediaryBank": "string",
+        "intermediaryAgent1": "ROGERS TOWING 0001 11 W ALOHA ST APT 206 SEATTLE,WA,98119 US",
+        "intermediaryAgent2": "ROGERS TOWING 0001 11 W ALOHA ST APT 206 SEATTLE,WA,98119 US",
+        "intermediaryAgent3": "ROGERS TOWING 0001 11 W ALOHA ST APT 206 SEATTLE,WA,98119 US",
+        "receivingBank": "987654321 US BK CINCINNATI",
+        "receivedDate": "2024-01-15T09:30:00.000Z",
+        "completedDate": "2024-01-15T09:30:00.000Z",
+        "initiatedBy": "AUT300I",
+        "approvedBy": "string",
+        "bankToBankInfo": "TEST ISSUE INFO",
+        "instructionForCreditorAgent": "TEST ISSUE INFO 555GHI",
+        "extendedRemitanceInfo": "Open text up to 9000 chars",
+        "usBankCharges": "USD 2.00",
+        "imad": "20190521A1B2C3D4E5F6G7",
+        "fedReference": "332211",
+        "swiftReference": "2J35U25478",
+        "controlNumber": "string"
+      },
+      "additionalInformation": [
+        "string"
+      ]
+    }
+  ],
+  "pageMeta": {
+    "pageNumber": 5,
+    "pageSize": 25,
+    "pageCount": 20,
+    "totalCount": 400,
+    "links": {
+      "prev": "/resourceURL?pageNumber=4&pageSize=25",
+      "next": "/resourceURL?pageNumber=6&pageSize=25"
+    }
+  }
+}
