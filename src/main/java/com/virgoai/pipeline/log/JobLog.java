@@ -13,6 +13,10 @@ public class JobLog {
         LOGGER.info("run_id={} job={} step={} event={} {}", runId, job, step, event, detail);
     }
 
+    public void warn(String runId, String job, String step, String event, String detail) {
+        LOGGER.warn("run_id={} job={} step={} event={} {}", runId, job, step, event, detail);
+    }
+
     public void error(String runId, String job, String step, String event, String message) {
         LOGGER.error("run_id={} job={} step={} event={} error=\"{}\"",
                 runId, job, step, event, message.replace('"', '\''));

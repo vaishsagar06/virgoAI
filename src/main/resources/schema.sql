@@ -63,3 +63,30 @@ CREATE TABLE IF NOT EXISTS out_transactions (
     currency VARCHAR(10),
     bank_charges DECIMAL(12,2)
 );
+
+CREATE TABLE IF NOT EXISTS stg_institutions (
+    run_id VARCHAR(36) NOT NULL,
+    page_no INT NOT NULL,
+    cert BIGINT,
+    bank_name VARCHAR(300),
+    city VARCHAR(100),
+    state_code VARCHAR(10),
+    assets_thousands DECIMAL(20,2),
+    deposits_thousands DECIMAL(20,2),
+    offices INT,
+    established VARCHAR(10),
+    date_updated VARCHAR(10)
+);
+
+CREATE TABLE IF NOT EXISTS out_institutions (
+    run_id VARCHAR(36) NOT NULL,
+    page_no INT NOT NULL,
+    cert BIGINT,
+    bank_name VARCHAR(300),
+    city VARCHAR(100),
+    state_code VARCHAR(10),
+    assets_usd DECIMAL(24,2),
+    deposits_usd DECIMAL(24,2),
+    offices INT,
+    established_date VARCHAR(10)
+);

@@ -107,7 +107,7 @@ public class TransactionsJob {
             log.info(runId, JOB, "END", "run_succeeded",
                     "records_read=" + read + " records_loaded=" + loaded + " watermark_moved=true");
         } catch (Exception e) {
-            Throwable cause = NestedExceptionUtils.getMostSpecificCause(e);
+            Throwable cause = Errors.sqlCauseOrSelf(e);
             String message = cause.getMessage() == null ? cause.getClass().getSimpleName() : cause.getMessage();
             message = message.replaceAll("\\s+", " ");
             if (message.length() > 900) {

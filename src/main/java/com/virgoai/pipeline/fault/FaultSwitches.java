@@ -10,11 +10,13 @@ import org.springframework.stereotype.Component;
 public class FaultSwitches {
 
     public static final String TRANSACTIONS_TYPE_MISMATCH = "transactions-type-mismatch";
+    public static final String FDIC_TIMEOUT = "fdic-timeout";
 
     private final Map<String, Boolean> switches = new ConcurrentHashMap<>();
 
     public FaultSwitches() {
         switches.put(TRANSACTIONS_TYPE_MISMATCH, false);
+        switches.put(FDIC_TIMEOUT, false);
     }
 
     public boolean isOn(String name) {
